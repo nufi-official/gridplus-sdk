@@ -1,11 +1,11 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.addMissingImports": true,
-        "source.organizeImports": true,
-        "source.formatDocument": true,
-        "source.fixAll": true
-    },
-    "editor.showUnused": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.organizeImports": "explicit",
+    "source.formatDocument": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "editor.showUnused": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true
 }

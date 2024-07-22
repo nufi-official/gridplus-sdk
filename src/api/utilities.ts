@@ -1,12 +1,12 @@
 import { connect, Utils } from '..';
 import { Client } from '../client';
 import {
-  saveClient,
-  loadClient,
-  setSaveClient,
-  setLoadClient,
   getFunctionQueue,
+  loadClient,
+  saveClient,
   setFunctionQueue,
+  setLoadClient,
+  setSaveClient,
 } from './state';
 
 /**
@@ -20,12 +20,14 @@ export const setup = async ({
   name,
   getStoredClient,
   setStoredClient,
+  appSecret,
 }: {
   deviceId?: string;
   password?: string;
   name?: string;
   getStoredClient: () => string;
   setStoredClient: (clientData: string | null) => void;
+  appSecret?: Buffer;
 }) => {
   if (!getStoredClient) throw new Error('Client data getter required');
   setSaveClient(buildSaveClientFn(setStoredClient));
@@ -34,7 +36,8 @@ export const setup = async ({
   setLoadClient(buildLoadClientFn(getStoredClient));
 
   if (deviceId && password && name) {
-    const privKey = Utils.generateAppSecret(deviceId, password, name);
+    const privKey =
+      appSecret ?? Utils.generateAppSecret(deviceId, password, name);
     const client = new Client({ deviceId, privKey, name });
     return client.connect(deviceId).then((isPaired) => {
       saveClient(client.getStateData());
