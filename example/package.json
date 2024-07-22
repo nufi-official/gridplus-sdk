@@ -12,8 +12,9 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@ethereumjs/common": "^3.0.2",
     "@ethereumjs/tx": "^4.0.2",
+    "bignumber.js": "^9.0.1",
     "buffer": "^6.0.3",
-    "gridplus-sdk": "^2.4.3",
+    "gridplus-sdk": "^2.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

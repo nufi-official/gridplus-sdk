@@ -1,5 +1,5 @@
+import { getClient, pair, setup } from 'gridplus-sdk';
 import { useEffect, useState } from 'react';
-import { getClient, pair, setup } from '../../src/api/index';
 import './App.css';
 import { Lattice } from './Lattice';
 
@@ -19,7 +19,13 @@ function App() {
 
   useEffect(() => {
     if (getStoredClient()) {
-      setup({ getStoredClient, setStoredClient });
+      setup({
+        deviceId: '',
+        password: '',
+        name: '',
+        getStoredClient,
+        setStoredClient,
+      });
     }
   }, []);
 
