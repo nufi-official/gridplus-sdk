@@ -14,10 +14,10 @@ import {
 } from '../constants';
 import { GetAddressesRequestParams, WalletPath } from '../types';
 import {
+  getFlagFromPath,
   getStartPath,
   parseDerivationPathComponents,
   queue,
-  getFlagFromPath,
 } from './utilities';
 
 type FetchAddressesParams = {
@@ -27,7 +27,7 @@ type FetchAddressesParams = {
 };
 
 export const fetchAddresses = async (overrides?: GetAddressesRequestParams) => {
-  let allAddresses: string[] = [];
+  let allAddresses: Buffer[] = [];
   let totalFetched = 0;
   const totalToFetch = overrides?.n || MAX_ADDR;
 
@@ -41,7 +41,7 @@ export const fetchAddresses = async (overrides?: GetAddressesRequestParams) => {
           ...overrides,
           n: batchSize,
         })
-        .then((addresses: string[]) => {
+        .then((addresses: Buffer[]) => {
           if (addresses.length > 0) {
             allAddresses = [...allAddresses, ...addresses];
             totalFetched += addresses.length;
@@ -61,7 +61,7 @@ export const fetchAddresses = async (overrides?: GetAddressesRequestParams) => {
  */
 export const fetchAddress = async (
   path: number | WalletPath = 0,
-): Promise<string> => {
+): Promise<Buffer> => {
   return fetchAddresses({
     startPath:
       typeof path === 'number'
